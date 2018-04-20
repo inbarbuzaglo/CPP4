@@ -1,18 +1,14 @@
-    
 #include <iostream>
-#include "Node.h"
+#include "CNode.h"
 
 using namespace std;
 
-Node::Node(int data)
+CNode::CNode(int data)
 {
-this->data_m=data;
+this->data=data;
 }
-Node*Node::next()
+
+ostream& operator<<(ostream& os, const CNode& n)
 {
-return next_m;
-}
-int Node::data()
-{
-return data_m;
+    return os;
 }
