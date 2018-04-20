@@ -1,35 +1,106 @@
-
 #include <iostream>
-#include "Node.h"
 #include "CircularInt.h"
+#include <string>
 
 using namespace std;
 
-    CircularInt::CircularInt(int start_m,int end_m)
-    {
-        this->head=NULL;
-        this->start=start_m;
-        this->end=end_m;
-
-    }
-
     void CircularInt::insert(int x)
     {
-        Node temp(x);
-        if(((this->start) == (this->end)) && (start==NULL))//list is empty
+        
+      cout<< "insert";
+    }
+
+
+    CircularInt::CircularInt(int start_input,int end_input)
+    {
+        CNode first(start_input);
+        this->current=NULL; //SHOULD BE FIRST
+        this->start=start_input;
+        this->end=end_input;
+        this->head=NULL;
+        for(int i=start;i<end+1;i++)
         {
-            *(this->head)=temp;
-            (this->head)->next=NULL;
-            &((this->head)->prev)=NULL;
+
 
         }
-        else
-        {
-            (this->end)->next=temp;
-            temp->prev=end;
-            end=temp;
-            start->prev=end;
-            end->next=start;
-        }
+
     }
-}
+    CircularInt& CircularInt::operator++() // prefix increment
+    {       
+        this->current =(this->current)->next; 
+        return *this;
+    }
+
+
+CircularInt& CircularInt::operator++(int value)       // postfix increment
+    { 
+
+    }
+
+   CircularInt& CircularInt::operator--(int)
+    {
+        this->current =(this->current)->prev; 
+        return *this;
+    }
+
+    bool CircularInt::operator==(const CircularInt other) const
+    {
+    return (this->current->data)==(other->current)->data;
+    
+    }
+
+    bool CircularInt::operator!=(const CircularInt other) const
+    {   
+        return (this->current)->data!=(other->current)->data;
+    }
+
+    int& CircularInt::operator*() 
+    { 
+    return (this->current)->data;
+    }
+
+   CircularInt::operator bool() 
+    {
+    return (this->current)!=0;
+    }
+
+    CircularInt& CircularInt::operator+=(int value) {
+    (this->current)->data += value;
+    return *this;
+    }
+
+   CircularInt& CircularInt::operator-=(int value) {
+    (this->current)->data -= value;
+    return *this;
+    }
+
+   CircularInt& CircularInt::operator*=(int value) 
+   {
+    (this->current)->data *= value;
+    return *this;
+
+    }
+
+ CircularInt& CircularInt::operator/=(int value) 
+   {
+    (this->current)->data /= value;
+    return *this;
+
+    }
+    const CircularInt& CircularInt::operator= (int value)
+    {
+        return *this;
+    }
+
+    ostream &operator<<( ostream &output, const CircularInt& ci)
+    {
+        CNode *p; 
+        return output;
+    }
+
+    CircularInt::~CircularInt()
+    {
+       cout<<"";
+    }
+
+
