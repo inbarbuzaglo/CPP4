@@ -1,5 +1,5 @@
 #include <iostream>
-#include "CircularInt.h"
+#include "CircularInt.hpp"
 
 #include <string>
 
