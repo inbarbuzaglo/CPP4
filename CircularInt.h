@@ -11,6 +11,7 @@ class CircularInt
 
     public:
     CNode* head; 
+    CNode* tail; 
     CNode* current;
 
     void insert(int x);
