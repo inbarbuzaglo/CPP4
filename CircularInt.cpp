@@ -1,33 +1,43 @@
 #include <iostream>
 #include "CircularInt.h"
+
 #include <string>
 
 using namespace std;
 
     void CircularInt::insert(int x)
-    {
-        
+    {      
       cout<< "insert";
     }
-
 
     CircularInt::CircularInt(int start_input,int end_input)
     {
         CNode first(start_input);
-        this->current=NULL; //SHOULD BE FIRST
+        this->current=&first; //SHOULD BE FIRST
         this->start=start_input;
         this->end=end_input;
-        this->head=NULL;
-        for(int i=start;i<end+1;i++)
+        this->head=&first;
+        this->tail=&first;
+        CNode temp=first;
+        for(int i=start_input+1;i<end_input+1;i++)
         {
-
-
+            CNode n(i);
+            n.prev=&temp;
+            temp.next=&n;
+            temp=n;
         }
-
+     
     }
+       // for(int i=start;i<end+1;i++)
+      //  {
+
+
+       // }
+
+   // }
     CircularInt& CircularInt::operator++() // prefix increment
     {       
-        this->current =(this->current)->next; 
+       // this->current =(this->current)->next; 
         return *this;
     }
 
@@ -39,19 +49,19 @@ CircularInt& CircularInt::operator++(int value)       // postfix increment
 
    CircularInt& CircularInt::operator--(int)
     {
-        this->current =(this->current)->prev; 
+       // this->current =(this->current)->prev; 
         return *this;
     }
 
     bool CircularInt::operator==(const CircularInt other) const
     {
-    return (this->current->data)==(other->current)->data;
+    return (this->current->data)==(other.current)->data;
     
     }
 
     bool CircularInt::operator!=(const CircularInt other) const
     {   
-        return (this->current)->data!=(other->current)->data;
+        return (this->current)->data!=(other.current)->data;
     }
 
     int& CircularInt::operator*() 
@@ -102,5 +112,4 @@ CircularInt& CircularInt::operator++(int value)       // postfix increment
     {
        cout<<"";
     }
-
 
