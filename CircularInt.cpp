@@ -44,7 +44,7 @@ using namespace std;
 
 CircularInt& CircularInt::operator++(int value)       // postfix increment
     { 
-
+        return *this;
     }
 
    CircularInt& CircularInt::operator--(int)
