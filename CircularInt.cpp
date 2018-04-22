@@ -1,10 +1,19 @@
 #include <iostream>
 #include "CircularInt.hpp"
-
 #include <string>
 
 using namespace std;
 
+
+CNode::CNode(int data)
+{
+this->data=data;
+}
+
+ostream& operator<<(ostream& os, const CNode& n)
+{
+    return os;
+}
     void CircularInt::insert(int x)
     {      
       cout<< "insert";
@@ -112,4 +121,3 @@ CircularInt& CircularInt::operator++(int value)       // postfix increment
     {
        cout<<"";
     }
-
