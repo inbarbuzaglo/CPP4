@@ -17,7 +17,7 @@ class CircularInt
     void insert(int x);
     CircularInt(int start_input,int end_input);
     CircularInt& operator++();
-    CircularInt& operator++(int);
+    CircularInt operator++(int);
     CircularInt& operator--(int);
     CircularInt& operator+=(int value); 
     CircularInt& operator-=(int value);
@@ -28,9 +28,12 @@ class CircularInt
     bool operator!=(const CircularInt other)const;
     int& operator*();
     operator bool() ;
+    
         
         ~CircularInt();
 
 };
+
+ostream &operator<<(ostream &output, const CircularInt& ci);
  
- ostream &operator<<( ostream &output, const CircularInt& ci);
+ 
