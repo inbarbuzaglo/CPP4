@@ -1,19 +1,20 @@
 #include <iostream>
 #include "CircularInt.hpp"
+
 #include <string>
 
 using namespace std;
 
+    CNode::CNode(int data)
+    {
+    this->data=data;
+    }
 
-CNode::CNode(int data)
-{
-this->data=data;
-}
+    ostream& operator<<(ostream& os, const CNode& n)
+    {
+        return os;
+    }
 
-ostream& operator<<(ostream& os, const CNode& n)
-{
-    return os;
-}
     void CircularInt::insert(int x)
     {      
       cout<< "insert";
@@ -22,7 +23,7 @@ ostream& operator<<(ostream& os, const CNode& n)
     CircularInt::CircularInt(int start_input,int end_input)
     {
         CNode first(start_input);
-        this->current=&first; //SHOULD BE FIRST
+        this->current=&first; 
         this->start=start_input;
         this->end=end_input;
         this->head=&first;
@@ -37,23 +38,18 @@ ostream& operator<<(ostream& os, const CNode& n)
         }
      
     }
-       // for(int i=start;i<end+1;i++)
-      //  {
 
-
-       // }
-
-   // }
     CircularInt& CircularInt::operator++() // prefix increment
     {       
-       // this->current =(this->current)->next; 
-        return *this;
+       return *this;
+
     }
 
-
-CircularInt& CircularInt::operator++(int value)       // postfix increment
+    CircularInt CircularInt::operator++(int)       // postfix increment
     { 
-        return *this;
+        CircularInt result(*this);   // make a copy for result
+        ++(*this);              // Now use the prefix version to do the work
+        return result;         // return the copy (the old) value.
     }
 
    CircularInt& CircularInt::operator--(int)
@@ -111,13 +107,13 @@ CircularInt& CircularInt::operator++(int value)       // postfix increment
         return *this;
     }
 
-    ostream &operator<<( ostream &output, const CircularInt& ci)
-    {
-        CNode *p; 
-        return output;
+    ostream &operator<<(ostream &output, const CircularInt& ci)
+    {      
+        return output<<(ci.current)->data;
     }
 
     CircularInt::~CircularInt()
     {
        cout<<"";
     }
+
