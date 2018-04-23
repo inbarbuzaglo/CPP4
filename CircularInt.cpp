@@ -41,15 +41,14 @@ using namespace std;
 
     CircularInt& CircularInt::operator++() // prefix increment
     {       
-       return *this;
+        this->current=(this->current)->next;
+        return *this; 
 
     }
 
-    CircularInt CircularInt::operator++(int)       // postfix increment
+    CircularInt& CircularInt::operator++(int)       // postfix increment
     { 
-        CircularInt result(*this);   // make a copy for result
-        ++(*this);              // Now use the prefix version to do the work
-        return result;         // return the copy (the old) value.
+        return *this;
     }
 
    CircularInt& CircularInt::operator--(int)
