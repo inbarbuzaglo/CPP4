@@ -17,7 +17,7 @@ class CircularInt
     void insert(int x);
     CircularInt(int start_input,int end_input);
     CircularInt& operator++();
-    CircularInt operator++(int);
+    CircularInt& operator++(int);
     CircularInt& operator--(int);
     CircularInt& operator+=(int value); 
     CircularInt& operator-=(int value);
