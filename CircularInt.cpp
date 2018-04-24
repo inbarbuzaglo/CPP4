@@ -47,7 +47,7 @@ using namespace std;
 
     CircularInt& CircularInt::operator++(int value)       // postfix increment
    {
-    CNode num((value+(this->current)->data+1)%12);
+    CNode num((value+(this->current)->data+1)%(end));
     CNode temp=*this->current;
     num.prev=&temp;
     temp.next=&num;
@@ -83,9 +83,19 @@ using namespace std;
     {
     return (this->current)!=0;
     }
+    
+    CircularInt& CircularInt::operator+(int value) {
+    CNode num((value+(this->current)->data)%(end));
+    CNode temp=*this->current;
+    num.prev=&temp;
+    temp.next=&num;
+    num=*this->current;
+    
+    return *this;
+    }
 
     CircularInt& CircularInt::operator+=(int value) {
-    CNode num((value+(this->current)->data)%12);
+    CNode num((value+(this->current)->data)%(end));
     CNode temp=*this->current;
     num.prev=&temp;
     temp.next=&num;
@@ -94,7 +104,7 @@ using namespace std;
     return *this;
     }
    CircularInt& CircularInt::operator-=(int value) {
-    CNode num((value-(this->current)->data)%12);
+    CNode num((value-(this->current)->data)%(end));
     CNode temp=*this->current;
     num.prev=&temp;
     temp.next=&num;
@@ -105,7 +115,7 @@ using namespace std;
 
    CircularInt& CircularInt::operator*=(int value) 
    {
-   CNode num((value*(this->current)->data)%12);
+   CNode num((value*(this->current)->data)%(end));
     CNode temp=*this->current;
     num.prev=&temp;
     temp.next=&num;
@@ -115,18 +125,17 @@ using namespace std;
 
     }
 
- CircularInt& CircularInt::operator/=(int value) 
+ CircularInt& CircularInt::operator/(int value) 
    {
-    CNode num((((this->current)->data)/(value))%12);
+    CNode num((((this->current)->data)/(value))%(end));
     CNode temp=*this->current;
     num.prev=&temp;
     temp.next=&num;
     num=*this->current;
-    
-    return *this;
+     return *this;
 
     }
-    const CircularInt& CircularInt::operator= (int data)
+    const CircularInt& CircularInt::operator=(int data)
     {
         return *this;
     }
