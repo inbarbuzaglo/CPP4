@@ -20,9 +20,10 @@ class CircularInt
     CircularInt& operator++(int value);
     CircularInt& operator--(int data);
     CircularInt& operator+=(int value); 
+    CircularInt& operator+(int value);
     CircularInt& operator-=(int value);
     CircularInt& operator*=(int value); 
-     CircularInt& operator/=(int value);
+     CircularInt& operator/(int value);
     const CircularInt& operator= (int data);
     bool operator==(const CircularInt other)const;
     bool operator!=(const CircularInt other)const;
