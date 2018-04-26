@@ -232,6 +232,18 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
          return (((this->current)->data)<((other.current)->data));
     }
 
+    bool CircularInt::operator >(int value)
+    {
+        return ((this->current)->data)>value;
+    
+    
+    }
+
+	bool CircularInt::operator <(int value)
+    {
+    return ((this->current)->data)<value;
+    }
+
     bool CircularInt::operator>=(const CircularInt other)
     {
           return (((this->current)->data)>=((other.current)->data));
