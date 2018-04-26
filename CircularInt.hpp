@@ -1,5 +1,5 @@
 #include <iostream>
-#include "CNode.hpp"
+#include "CNode.h"
 
 using namespace std;
 
@@ -10,25 +10,27 @@ class CircularInt
     int end;
 
     public:
-    CNode* head; 
-    CNode* tail; 
     CNode* current;
 
     void insert(int x);
     CircularInt(int start_input,int end_input);
     CircularInt& operator++();
     CircularInt& operator++(int value);
-    CircularInt& operator--(int data);
-    CircularInt& operator+=(int value); 
     CircularInt& operator+(int value);
-    CircularInt& operator-=(int value);
+    CircularInt& operator+(const CircularInt other);
+    CircularInt& operator+=(int value); 
     CircularInt& operator*=(int value); 
      CircularInt& operator/(int value);
-    const CircularInt& operator= (int data);
     bool operator==(const CircularInt other)const;
     bool operator!=(const CircularInt other)const;
-    int& operator*();
-    operator bool() ;
+    const CircularInt& operator=(int value);
+     operator bool();
+
+    CircularInt& operator-(const CircularInt other);   
+    CircularInt& operator--(int data);
+    CircularInt& operator-=(int value);
+ 
+  
     
         
         ~CircularInt();
