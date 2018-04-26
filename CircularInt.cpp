@@ -36,63 +36,86 @@ using namespace std;
      
     }  
 
-    CircularInt& CircularInt::operator++() // prefix increment
-    {       
-       CNode num(((this->current)->data+1)%(end));
-        return *this; 
-    }
-
-
-    CircularInt& CircularInt::operator++(int value)       // postfix increment
+    CircularInt& CircularInt::operator++(int)       // +1 check
    {
-    CNode num((value+(this->current)->data+1)%(end));
-    
+    if(this->current->data % end == 0) // check if its on 12 , if it does then 12+1 = 1
+    {
+        this->current->data=start;
+    }
+    else
+    {
+        this->current->data= this->current->data+1; 
+    }
     return *this;
      
   } 
 
-
-     CircularInt& CircularInt::operator+(int value) 
+     CircularInt& CircularInt::operator+() //check
     {
-    CNode num((value+(this->current)->data)%(end));
-    
+    this->current->data += (this->current->data)%end;
     return *this;
     }
 
-   CircularInt& CircularInt::operator+=(int value) {
-    CNode num((value+(this->current)->data)%(end));
-    
+   CircularInt& CircularInt::operator+=(int value)//check
+  {
+    if (this->current->data+value<=end)
+    {
+        this->current->data = this->current->data+value;
+    }
+    else
+    {
+        this->current->data = (this->current->data+value)%end;
+    }
     return *this;
     }
-
-    CircularInt& CircularInt::operator+(const CircularInt other)       // postfix increment
+    CircularInt& CircularInt::operator+(const CircularInt other)//check
    {
-    CNode num(((this->current)->data+(other.current)->data)%(end));
-    
+    if ((this->current->data+other.current->data)<=end)
+    {
+        this->current->data = this->current->data+other.current->data;
+    }
+    else
+    {
+    this->current->data = (this->current->data+other.current->data)%end;
+
+    }
     return *this;
      
   } 
 
-    CircularInt& CircularInt::operator*(const CircularInt other)
+    CircularInt& CircularInt::operator*(const CircularInt other)//check
     {
-    while ((this->current->data*other.current->data) > end)
+    if ((this->current->data*other.current->data)>end) //if its bigger then 12 then do %12
     {
-    this->current->data = (this->current->data*other.current->data) % (end);
+    this->current->data = (this->current->data*other.current->data)%(end);
     }
-    this->current->data = this->current->data *other.current->data;
+    else 
+    {
+    this->current->data = this->current->data *other.current->data; 
+    }
     return *this;
     }
     
-    CircularInt& CircularInt::operator*=(int value) 
+    CircularInt& CircularInt::operator*=(int value) //check
    {
-   CNode num((value*(this->current)->data)%(end));
- 
-    return *this;
+     if (this->current->data*value<=end)
+    {
+        this->current->data=this->current->data*value;
+    }
+    else
+    {
+        this->current->data=(this->current->data*value)%end;
 
     }
+    return *this;
+    }
+CircularInt& CircularInt::operator/(const CircularInt other)//needs to be completed
+{
 
+    return *this;
+}
 
- CircularInt& CircularInt::operator/(int value) 
+ CircularInt& CircularInt::operator/(int value) //needs to be completed
    {
     if(((double)(this->current->data)/value)<(double)start)
     {
@@ -105,12 +128,12 @@ using namespace std;
     return *this;
     }
 
-   CircularInt::operator bool() 
+   CircularInt::operator bool() //check
     {
     return (this->current)!=0;
     }
 
-   CircularInt& CircularInt::operator-()
+   CircularInt& CircularInt::operator-()//check
     {
     this->current->data=(this->current->data)-(end);
 
@@ -128,9 +151,9 @@ using namespace std;
     return *this;
     }
 
-    CircularInt& CircularInt::operator--(int value)
+    CircularInt& CircularInt::operator--(int) // -1 check 
 {
-    if (this->current->data == start)
+    if (this->current->data == start)//if it on 1 a hour before that is 12
     {
         this->current->data = end;
     }
@@ -142,35 +165,33 @@ using namespace std;
 }
 
   
-   CircularInt& CircularInt::operator-=(int value) {
-
+   CircularInt& CircularInt::operator-=(int value) //check
    {
-    while ((this->current->data - value) < start)
+    while ((this->current->data - value)<start)
     {
-    this->current->data = (this->current->data - value) % start;
+    this->current->data=(this->current->data-value)%start;
     }
-    this->current->data = this->current->data - value;
-    if (this->current->data < start) 
+    this->current->data = this->current->data-value;
+    if (this->current->data<start) 
     {
-        this->current->data = start;
+        this->current->data=start;
     }
     return *this;
-   }
     }
- bool CircularInt::operator==(const CircularInt other) const
+ bool CircularInt::operator==(const CircularInt other) const//compare two objects -check
    {
    return (this->current->data)==(other.current)->data;
     
   }
 
-   bool CircularInt::operator!=(const CircularInt other) const
+   bool CircularInt::operator!=(const CircularInt other) const//compare as well if they difference-check
    {   
        return (this->current)->data!=(other.current)->data;
     }
 
 
 
-    ostream &operator<<(ostream &output, const CircularInt& ci)
+    ostream &operator<<(ostream &output, const CircularInt& ci)//printing
     {      
         return output<<(ci.current)->data;
     }
