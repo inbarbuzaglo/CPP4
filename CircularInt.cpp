@@ -25,8 +25,6 @@ using namespace std;
         this->current=&first; 
         this->start=start_input;
         this->end=end_input;
-        this->head=&first;
-        this->tail=&first;
         CNode temp=first;
         for(int i=start_input;i<end_input+1;i++)
         {
@@ -40,30 +38,58 @@ using namespace std;
 
     CircularInt& CircularInt::operator++() // prefix increment
     {       
-        this->current=(this->current)->next;
+       CNode num(((this->current)->data+1)%(end));
         return *this; 
-
     }
+
 
     CircularInt& CircularInt::operator++(int value)       // postfix increment
    {
     CNode num((value+(this->current)->data+1)%(end));
-    CNode temp=*this->current;
-    num.prev=&temp;
-    temp.next=&num;
-    num=*this->current;
     
     return *this;
      
   } 
 
-   CircularInt& CircularInt::operator--(int data)
+
+     CircularInt& CircularInt::operator+(int value) 
     {
-     (this->current)->data--;
+    CNode num((value+(this->current)->data)%(end));
+    
     return *this;
     }
 
-    bool CircularInt::operator==(const CircularInt other) const
+   CircularInt& CircularInt::operator+=(int value) {
+    CNode num((value+(this->current)->data)%(end));
+    
+    return *this;
+    }
+
+    CircularInt& CircularInt::operator+(const CircularInt other)       // postfix increment
+   {
+    CNode num(((this->current)->data+(other.current)->data)%(end));
+    
+    return *this;
+     
+  } 
+
+    CircularInt& CircularInt::operator*=(int value) 
+   {
+   CNode num((value*(this->current)->data)%(end));
+ 
+    return *this;
+
+    }
+
+ CircularInt& CircularInt::operator/(int value) 
+   {
+    CNode num((((this->current)->data)/(value))%(end));
+
+     return *this;
+
+    }
+
+  bool CircularInt::operator==(const CircularInt other) const
     {
     return (this->current->data)==(other.current)->data;
     
@@ -74,9 +100,9 @@ using namespace std;
         return (this->current)->data!=(other.current)->data;
     }
 
-    int& CircularInt::operator*() 
-    { 
-    return (this->current)->data;
+    const CircularInt& CircularInt::operator=(int value)
+    {
+        return *this;
     }
 
    CircularInt::operator bool() 
@@ -84,60 +110,26 @@ using namespace std;
     return (this->current)!=0;
     }
     
-    CircularInt& CircularInt::operator+(int value) {
-    CNode num((value+(this->current)->data)%(end));
-    CNode temp=*this->current;
-    num.prev=&temp;
-    temp.next=&num;
-    num=*this->current;
-    
+
+
+
+
+   CircularInt& CircularInt::operator-(const CircularInt other)
+    {
+    CNode num(((this->current->data)-(end))-(2*(other.current->data)));
     return *this;
     }
-
-    CircularInt& CircularInt::operator+=(int value) {
-    CNode num((value+(this->current)->data)%(end));
-    CNode temp=*this->current;
-    num.prev=&temp;
-    temp.next=&num;
-    num=*this->current;
-    
-    return *this;
-    }
-   CircularInt& CircularInt::operator-=(int value) {
-    CNode num((value-(this->current)->data)%(end));
-    CNode temp=*this->current;
-    num.prev=&temp;
-    temp.next=&num;
-    num=*this->current;
-    
-    return *this;
-    }
-
-   CircularInt& CircularInt::operator*=(int value) 
-   {
-   CNode num((value*(this->current)->data)%(end));
-    CNode temp=*this->current;
-    num.prev=&temp;
-    temp.next=&num;
-    num=*this->current;
-    
-    return *this;
-
-    }
-
- CircularInt& CircularInt::operator/(int value) 
-   {
-    CNode num((((this->current)->data)/(value))%(end));
-    CNode temp=*this->current;
-    num.prev=&temp;
-    temp.next=&num;
-    num=*this->current;
-     return *this;
-
-    }
-    const CircularInt& CircularInt::operator=(int data)
+    CircularInt& CircularInt::operator--(int data)
     {
         return *this;
+    }
+
+  
+   CircularInt& CircularInt::operator-=(int value) {
+
+    CNode num((value-(this->current)->data)%(end));
+
+    return *this;
     }
 
     ostream &operator<<(ostream &output, const CircularInt& ci)
