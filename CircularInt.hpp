@@ -26,7 +26,7 @@ class CircularInt
     const CircularInt& operator=(int value);
      operator bool();
     CircularInt& operator-(); 
-    CircularInt& operator--(value);
+    CircularInt& operator--(int value);
     CircularInt& operator-=(int value);
  
   
