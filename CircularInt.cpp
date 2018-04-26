@@ -137,9 +137,17 @@ using namespace std;
     }
 
     CircularInt& CircularInt::operator--(int data)
+{
+    if (this->current->data == start)
     {
-        return *this;
+        this->current->data = end;
     }
+    else
+    {
+        this->current->data = this->current->data - 1;
+    }
+    return *this;
+}
 
   
    CircularInt& CircularInt::operator-=(int value) {
@@ -147,10 +155,10 @@ using namespace std;
    {
     while ((this->current->data - value) < start)
     {
-        this->current->data = (this->current->data - value) % start;
+    this->current->data = (this->current->data - value) % start;
     }
     this->current->data = this->current->data - value;
-    if (this->current->data < start) // check if number is viable.
+    if (this->current->data < start) 
     {
         this->current->data = start;
     }
