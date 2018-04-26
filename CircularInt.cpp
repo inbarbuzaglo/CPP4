@@ -144,9 +144,18 @@ using namespace std;
   
    CircularInt& CircularInt::operator-=(int value) {
 
-    CNode num((value-(this->current)->data)%(end));
-
+   {
+    while ((this->current->data - value) < start)
+    {
+        this->current->data = (this->current->data - value) % start;
+    }
+    this->current->data = this->current->data - value;
+    if (this->current->data < start) // check if number is viable.
+    {
+        this->current->data = start;
+    }
     return *this;
+   }
     }
 
     ostream &operator<<(ostream &output, const CircularInt& ci)
