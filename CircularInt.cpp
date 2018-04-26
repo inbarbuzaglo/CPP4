@@ -83,10 +83,15 @@ using namespace std;
 
  CircularInt& CircularInt::operator/(int value) 
    {
-    CNode num((((this->current)->data)/(value))%(end));
+    if(((double)(this->current->data)/value)<(double)start)
+    {
+    cout<<"There is no number x in {1,12}"<<endl;
 
-     return *this;
+    }
+  
+    this->current->data=(((this->current->data)/(value))%(end));
 
+    return *this;
     }
 
   bool CircularInt::operator==(const CircularInt other) const
@@ -113,12 +118,24 @@ using namespace std;
 
 
 
-
-   CircularInt& CircularInt::operator-(const CircularInt other)
+   CircularInt& CircularInt::operator-()
     {
-    CNode num(((this->current->data)-(end))-(2*(other.current->data)));
+    this->current->data=(this->current->data)-(end);
+
+    while(this->current->data < start)
+    {
+        if(this->current->data < 0)
+        {
+            this->current->data=  ((this->current->data)-((this->current->data)*2))%(end);
+        }
+        else
+        {
+            this->current->data=(this->current->data)%(end);
+        }
+    }
     return *this;
     }
+
     CircularInt& CircularInt::operator--(int data)
     {
         return *this;
