@@ -25,8 +25,8 @@ class CircularInt
     bool operator!=(const CircularInt other)const;
     const CircularInt& operator=(int value);
      operator bool();
-
-    CircularInt& operator-(const CircularInt other);   
+    CircularInt& operator-(); 
+      
     CircularInt& operator--(int data);
     CircularInt& operator-=(int value);
  
