@@ -1,5 +1,5 @@
 #include <iostream>
-#include "CNode.h"
+#include "CNode.hpp"
 
 using namespace std;
 
