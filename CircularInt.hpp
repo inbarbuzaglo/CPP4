@@ -1,5 +1,5 @@
 #include <iostream>
-#include "CNode.hpp"
+#include "CNode.h"
 
 using namespace std;
 
@@ -26,8 +26,7 @@ class CircularInt
     const CircularInt& operator=(int value);
      operator bool();
     CircularInt& operator-(); 
-      
-    CircularInt& operator--(int data);
+    CircularInt& operator--(value);
     CircularInt& operator-=(int value);
  
   
