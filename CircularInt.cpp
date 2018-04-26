@@ -157,6 +157,18 @@ using namespace std;
     return *this;
    }
     }
+ bool CircularInt::operator==(const CircularInt other) const
+   {
+   return (this->current->data)==(other.current)->data;
+    
+  }
+
+   bool CircularInt::operator!=(const CircularInt other) const
+   {   
+       return (this->current)->data!=(other.current)->data;
+    }
+
+
 
     ostream &operator<<(ostream &output, const CircularInt& ci)
     {      
