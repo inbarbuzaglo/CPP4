@@ -73,6 +73,16 @@ using namespace std;
      
   } 
 
+    CircularInt& CircularInt::operator*(const CircularInt other)
+    {
+    while ((this->current->data*other.current->data) > end)
+    {
+    this->current->data = (this->current->data*other.current->data) % (end);
+    }
+    this->current->data = this->current->data *other.current->data;
+    return *this;
+    }
+    
     CircularInt& CircularInt::operator*=(int value) 
    {
    CNode num((value*(this->current)->data)%(end));
@@ -80,6 +90,7 @@ using namespace std;
     return *this;
 
     }
+
 
  CircularInt& CircularInt::operator/(int value) 
    {
@@ -94,29 +105,10 @@ using namespace std;
     return *this;
     }
 
-  bool CircularInt::operator==(const CircularInt other) const
-    {
-    return (this->current->data)==(other.current)->data;
-    
-    }
-
-    bool CircularInt::operator!=(const CircularInt other) const
-    {   
-        return (this->current)->data!=(other.current)->data;
-    }
-
-    const CircularInt& CircularInt::operator=(int value)
-    {
-        return *this;
-    }
-
    CircularInt::operator bool() 
     {
     return (this->current)!=0;
     }
-    
-
-
 
    CircularInt& CircularInt::operator-()
     {
