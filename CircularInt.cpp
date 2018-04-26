@@ -136,7 +136,7 @@ using namespace std;
     return *this;
     }
 
-    CircularInt& CircularInt::operator--(int data)
+    CircularInt& CircularInt::operator--(int value)
 {
     if (this->current->data == start)
     {
