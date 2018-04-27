@@ -160,6 +160,36 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
       }
    }
 
+    CircularInt& CircularInt::operator%=(int value)
+    {
+        if(this->current->data%value==0)
+        {
+            this->current->data= end;
+        }
+
+      else
+        {
+            this->current->data= this->current->data%value;
+        }
+
+        return *this;
+    }
+
+    CircularInt& CircularInt::operator%=(const CircularInt other)
+    {
+        if(this->current->data%((other.current)->data)==0)
+        {
+            this->current->data= end;
+        }
+
+      else
+        {
+            this->current->data= this->current->data%(other.current)->data;
+        }
+
+        return *this;
+    }
+
   //  CircularInt& CircularInt::operator%(int value)
   //  {
   //      if((this->current->data)<=value)
@@ -325,8 +355,8 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
 
     istream &operator>>(istream &input, const CircularInt& ci)
     {
-        input>>(ci.current)->data;
-        return input;
+       
+        return input>>(ci.current)->data;
     }
 
     CircularInt::~CircularInt()
