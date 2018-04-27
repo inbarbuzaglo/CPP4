@@ -27,6 +27,8 @@ class CircularInt
     CircularInt& operator-=(int value);
     CircularInt& operator-(int value); //number-object   
     CircularInt& operator/(const CircularInt other);//needs to be completed
+    CircularInt& operator%=(int value);
+    CircularInt& CircularInt::operator%=(const CircularInt other);
     CircularInt& operator*(const CircularInt other); //check
     CircularInt& operator=(int value);
     bool operator==(const CircularInt other)const;//check
@@ -54,4 +56,5 @@ bool operator!=(int value, const CircularInt other);
 //bool operator>=(int value, const CircularInt other); 
 ostream &operator<<(ostream &output, const CircularInt& ci);
 istream &operator>>(istream &input, const CircularInt& ci);
+
 
