@@ -17,8 +17,10 @@ class CircularInt
     CircularInt& operator++(int);//check
     CircularInt& operator+();//check
     CircularInt& operator+=(int value); //check
-    CircularInt& operator*=(int value); //check
+    CircularInt& operator*=(int value);//check
+    CircularInt& operator*=(const CircularInt other); 
     CircularInt& operator/(int value);//needs to be completed+add /=
+   // CircularInt& operator%(int value);
     operator bool();//check
     CircularInt& operator-();//check 
     CircularInt& operator--(int);//check
@@ -30,7 +32,7 @@ class CircularInt
     bool operator==(const CircularInt other)const;//check
     bool operator==(int value);
     bool operator!=(const CircularInt other)const;//check
-    bool operator!=(int value);  
+    bool operator!=(int value);
     bool operator>(const CircularInt other);
     bool operator<(const CircularInt other);
     bool operator>(int value);
