@@ -110,6 +110,22 @@ using namespace std;
     return *this;
     }
 
+
+   CircularInt& CircularInt::operator*=(const CircularInt other) //check
+   {
+     if (this->current->data*((other.current)->data)<=end)
+    {
+        this->current->data=this->current->data*((other.current)->data);
+    }
+    else
+    {
+        this->current->data=(this->current->data*((other.current)->data))%end;
+
+    }
+    return *this;
+    }
+
+
     CircularInt& CircularInt::operator=(int value)
     {
         if(value<=end)
@@ -143,6 +159,19 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
            cout<<"There is no number x in {1,12}"<<endl;
       }
    }
+
+  //  CircularInt& CircularInt::operator%(int value)
+  //  {
+  //      if((this->current->data)<=value)
+   //     {
+   //         return *this;
+   //     }
+   //     else
+   //     {
+
+   //     }
+      
+  
 
    CircularInt::operator bool() //check
     {
@@ -256,6 +285,8 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
     return ((this->current)->data)<value;
     }
 
+ 
+
     bool CircularInt::operator>=(const CircularInt other)
     {
           return (((this->current)->data)>=((other.current)->data));
@@ -286,12 +317,7 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
         return (value)!=(other.current)->data;
     }
 
-   
-
-
- 
-
-
+  
     ostream &operator<<(ostream &output, const CircularInt& ci)//printing
     {      
         return output<<(ci.current)->data;
