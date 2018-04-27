@@ -217,10 +217,22 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
     
   }
 
+  bool CircularInt::operator==(int value)
+   {
+   return (this->current->data)==value;   
+  }
+
+
    bool CircularInt::operator!=(const CircularInt other) const//compare as well if they difference-check
    {   
        return (this->current)->data!=(other.current)->data;
-    }
+   }
+
+       bool CircularInt::operator!=(int value)
+   {   
+       return (this->current)->data!=value;
+   }
+
 
     bool CircularInt::operator>(const CircularInt other)
     {
@@ -254,7 +266,48 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
          return (((this->current)->data)<=((other.current)->data));
     }
 
+       bool CircularInt::operator>=(int value)
+    {
+          return ((this->current)->data)>=value;
+    }
 
+    bool CircularInt::operator<=(int value)
+    {   
+         return ((this->current)->data)<=value;
+    }
+
+    bool operator==(int value, const CircularInt other)//compare two objects -check
+    {
+        return (value)==(other.current)->data;
+    }
+
+     bool operator!=(int value, const CircularInt other)//compare two objects -check
+    {
+        return (value)!=(other.current)->data;
+    }
+
+    bool operator<(int value, const CircularInt other)
+    {   
+         return value<(other.current)->data;
+    }
+
+   bool operator>(int value, const CircularInt other)
+    {   
+         return value>(other.current)->data;
+    }
+
+
+
+
+    bool operator<=(int value, const CircularInt other)
+    {   
+         return value<=(other.current)->data;
+    }
+
+   bool operator>=(int value, const CircularInt other)
+    {   
+         return value>=(other.current)->data;
+    }
 
     ostream &operator<<(ostream &output, const CircularInt& ci)//printing
     {      
