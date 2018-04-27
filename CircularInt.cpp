@@ -56,8 +56,16 @@ using namespace std;
     return *this;
     }
 
+      CircularInt& CircularInt::operator+(int value) //check
+    {
+       CircularInt* temp = new CircularInt(*this);
+    	int result = this->current->data+ value;
+	    temp->current->data = result%end;
+	    return *temp;
+    }
+
    CircularInt& CircularInt::operator+=(int value)//check
-  {
+  {      
     if (this->current->data+value<=end)
     {
         this->current->data = this->current->data+value;
@@ -113,13 +121,13 @@ using namespace std;
 
    CircularInt& CircularInt::operator*=(const CircularInt other) //check
    {
-     if (this->current->data*((other.current)->data)<=end)
+     if ((this->current->data*((other.current)->data))<=end)
     {
-        this->current->data=this->current->data*((other.current)->data);
+        this->current->data=(this->current->data)*((other.current)->data);
     }
     else
     {
-        this->current->data=(this->current->data*((other.current)->data))%end;
+        this->current->data=(this->current->data)*((other.current)->data)%end;
 
     }
     return *this;
