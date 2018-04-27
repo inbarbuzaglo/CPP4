@@ -33,8 +33,8 @@ class CircularInt
     bool operator!=(int value);  
     bool operator>(const CircularInt other);
     bool operator<(const CircularInt other);
-    bool operator >(int value);
-	bool operator <(int value);
+    bool operator>(int value);
+	bool operator<(int value);
     bool operator>=(const CircularInt other);
     bool operator<=(const CircularInt other);
     bool operator>=(int value);
@@ -42,7 +42,6 @@ class CircularInt
     CircularInt& operator+(const CircularInt other);//check
         
         ~CircularInt();
-
 };
 
 bool operator==(int value, const CircularInt other);  
