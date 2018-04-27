@@ -286,15 +286,19 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
         return (value)!=(other.current)->data;
     }
 
-    bool operator<(int value, const CircularInt other)
+    bool operator<=(int value, const CircularInt other)
     {   
-         return value<(other.current)->data;
+         return value<=(other.current)->data;
     }
 
-   bool operator>(int value, const CircularInt other)
+   bool operator>=(int value, const CircularInt other)
     {   
-         return value>(other.current)->data;
+         return value>=(other.current)->data;
     }
+
+
+
+ 
 
 
     ostream &operator<<(ostream &output, const CircularInt& ci)//printing
