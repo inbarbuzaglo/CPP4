@@ -56,13 +56,13 @@ using namespace std;
     return *this;
     }
 
-      CircularInt& CircularInt::operator+(int value) //check
-    {
-       CircularInt* temp = new CircularInt(*this);
-    	int result = this->current->data+ value;
-	    temp->current->data = result%end;
-	    return *temp;
-    }
+  //    CircularInt& CircularInt::operator+(int value) //check
+  //  {
+   //    CircularInt* temp = new CircularInt(*this);
+   // 	int result = this->current->data+ value;
+//	    temp->current->data = result%end;
+//	    return *temp;
+  //  }
 
    CircularInt& CircularInt::operator+=(int value)//check
   {      
