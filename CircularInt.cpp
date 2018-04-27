@@ -276,6 +276,16 @@ CircularInt& CircularInt::operator/(const CircularInt other)//needs to be comple
          return ((this->current)->data)<=value;
     }
 
+    bool operator==(int value, const CircularInt other)//compare two objects -check
+    {
+        return (value)==(other.current)->data;
+    }
+
+    bool operator!=(int value, const CircularInt other)
+    {
+        return (value)!=(other.current)->data;
+    }
+
 
     ostream &operator<<(ostream &output, const CircularInt& ci)//printing
     {      
