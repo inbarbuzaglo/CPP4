@@ -44,8 +44,8 @@ class CircularInt
         ~CircularInt();
 };
 
-//bool operator==(int value, const CircularInt other);  
-//bool operator!=(int value, const CircularInt other); 
+bool operator==(int value, const CircularInt other);  
+bool operator!=(int value, const CircularInt other); 
 //bool operator<(int value, const CircularInt other);
 //bool operator>(int value, const CircularInt other);
 //bool operator<=(int value, const CircularInt other);
