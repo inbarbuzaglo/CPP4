@@ -48,8 +48,8 @@ bool operator==(int value, const CircularInt other);
 bool operator!=(int value, const CircularInt other); 
 //bool operator<(int value, const CircularInt other);
 //bool operator>(int value, const CircularInt other);
-bool operator<=(int value, const CircularInt other);
-bool operator>=(int value, const CircularInt other); 
+//bool operator<=(int value, const CircularInt other);
+//bool operator>=(int value, const CircularInt other); 
 ostream &operator<<(ostream &output, const CircularInt& ci);
 istream &operator>>(istream &input, const CircularInt& ci);
 
