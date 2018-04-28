@@ -203,15 +203,6 @@ bool operator!=(int val, const CircularInt & c)
 	return val != c.currentval;
 }
 
-bool operator>(int val, const CircularInt & c)
-{
-	return val > c.currentval;
-}
-
-bool operator<(int val, const CircularInt & c)
-{
-	return val < c.currentval;
-}
 
 bool operator>=(int val, const CircularInt & c)
 {
