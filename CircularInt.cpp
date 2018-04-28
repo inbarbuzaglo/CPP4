@@ -156,12 +156,12 @@ bool CircularInt::operator!=(int const & c)
 
 bool CircularInt::operator>(CircularInt const & c)
 {
-	return this->currentval > c.currentval;
+	return this->currentval < c.currentval;
 }
 
 bool CircularInt::operator<(CircularInt const & c)
 {
-	return this->currentval < c.currentval;
+	return this->currentval > c.currentval;
 }
 
 bool CircularInt::operator>(int const & c)
