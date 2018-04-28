@@ -76,7 +76,7 @@ CircularInt CircularInt::operator++(int)
 
 CircularInt & CircularInt::operator--()
 {
-	int res = --currentval;
+	int res = currentval-1;
 	currentval = CurrentValue(res);
 	return *this;
 }
