@@ -57,7 +57,8 @@ public:
 
     friend bool operator==(int val, const CircularInt& c);
 	friend bool operator!=(int val, const CircularInt& c);
-
+    friend bool operator>(int val, const CircularInt& c);
+	friend bool operator<(int val, const CircularInt& c);
 	friend bool operator>=(int val, const CircularInt& c);
 	friend bool operator<=(int val, const CircularInt& c);
 
