@@ -203,6 +203,15 @@ bool operator!=(int val, const CircularInt & c)
 	return val != c.currentval;
 }
 
+bool operator>(int val, const CircularInt & c)
+{
+	return val > c.currentval;
+}
+
+bool operator<(int val, const CircularInt & c)
+{
+	return val < c.currentval;
+}
 
 bool operator>=(int val, const CircularInt & c)
 {
@@ -233,9 +242,6 @@ CircularInt operator+(int val, const CircularInt & c)
 CircularInt operator/(int val, const CircularInt & c)
 {
 	CircularInt res(c);
-	if (val % c.currentval != 0) {
-		throw string(string("There is no numcer x in { ") + to_string(c.min1) + string(",") + to_string(c.max1) + " } such that x * " + to_string(c.currentval) + " = " + to_string(val));
-	}
 	int result = val / c.currentval;
 	res.currentval = res.CurrentValue(result);
 	return res;
