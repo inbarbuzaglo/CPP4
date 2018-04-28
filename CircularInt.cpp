@@ -1,375 +1,352 @@
-#include <iostream>
 #include "CircularInt.hpp"
+#include <algorithm>
 #include <string>
-
 using namespace std;
 
-    CNode::CNode(int data)
-    {
-    this->data=data;
-    }
-
-    ostream& operator<<(ostream& os, const CNode& n)
-    {
-        return os;
-    }
-
-    void CircularInt::insert(int x)
-    {      
-      cout<< "insert";
-    }
-
-    CircularInt::CircularInt( int start_input,  int end_input)
-     {
-        CNode first(start_input);
-        this->current=&first; 
-        this->start=start_input;
-        this->end=end_input;
-        CNode temp=first;
-        for(int i=start_input;i<end_input+1;i++)
-        {
-            CNode n(i);
-            n.prev=&temp;
-            temp.next=&n;
-            temp=n;
-        }
-     
-    }  
-
-    CircularInt& CircularInt::operator++(int)       // +1 check
-   {
-    if(this->current->data % end == 0) // check if its on 12 , if it does then 12+1 = 1
-    {
-        this->current->data=start;
-    }
-    else
-    {
-        this->current->data= this->current->data+1; 
-    }
-    return *this;
-     
-  } 
-
-     CircularInt& CircularInt::operator+() //check
-    {
-    this->current->data += (this->current->data)%end;
-    return *this;
-    }
-
-      CircularInt& CircularInt::operator+(int value) //check
-    {
-       CircularInt* temp = new CircularInt(*this);
-    	int result = (this->current->data)+ value;
-        cout<<result<<"test\n";
-	    temp->current->data = result%end;
-        cout<<temp->current->data<<"\ntest\n";
-	    return *temp;
-    }
-
-   CircularInt& CircularInt::operator+=(int value)//check
-  {      
-    if (this->current->data+value<=end)
-    {
-        this->current->data = this->current->data+value;
-    }
-    else
-    {
-        this->current->data = (this->current->data+value)%end;
-    }
-    return *this;
-    }
-    CircularInt& CircularInt::operator+(const CircularInt other)//check
-   {
-    if ((this->current->data+other.current->data)<=end)
-    {
-        this->current->data = this->current->data+other.current->data;
-    }
-    else
-    {
-    this->current->data = (this->current->data+other.current->data)%end;
-
-    }
-    return *this;
-     
-  } 
-
-    CircularInt& CircularInt::operator*(const CircularInt other)//check
-    {
-    if ((this->current->data*other.current->data)>end) //if its bigger then 12 then do %12
-    {
-    this->current->data = (this->current->data*other.current->data)%(end);
-    }
-    else 
-    {
-    this->current->data = this->current->data *other.current->data; 
-    }
-    return *this;
-    }
-    
-    CircularInt& CircularInt::operator*=(int value) //check
-   {
-     if (this->current->data*value<=end)
-    {
-        this->current->data=this->current->data*value;
-    }
-    else
-    {
-        this->current->data=(this->current->data*value)%end;
-
-    }
-    return *this;
-    }
-
-
-   CircularInt& CircularInt::operator*=(const CircularInt other) //check
-   {
-     if ((this->current->data*((other.current)->data))<=end)
-    {
-        this->current->data=(this->current->data)*((other.current)->data);
-    }
-    else
-    {
-        this->current->data=(this->current->data)*((other.current)->data)%end;
-
-    }
-    return *this;
-    }
-
-
-    CircularInt& CircularInt::operator=(int value)
-    {
-        if(value<=end)
-        {
-          this->current->data= value;
-        }
-        else
-        {
-          this->current->data= value%end;
-        }
-        return *this;
-    }
-
-CircularInt& CircularInt::operator/(const CircularInt other)//needs to be completed
+int CircularInt::CurrentValue(int value)
 {
-    
-    return *this;
+    int cur=((value - min1) % (range) + range) % (range) + min1;
+	return cur;
+}
+CircularInt::CircularInt(int low, int high)
+{
+	max1 = max(high, low);
+    min1 = min(low, high);
+	range = abs(max1 - min1) + 1;
+    currentval = min1;
+}
+CircularInt::CircularInt(const CircularInt & other)
+{
+    this->max1 = other.max1;
+	this->min1 = other.min1;
+    this->range = other.range;
+	this->currentval = other.currentval;
+	
 }
 
- CircularInt& CircularInt::operator/(int value) //needs to be completed
-   {
-      double d=(this->current->data)/value;
-      int x=d;
-      if(d-x==0) //the number is int
-      {
-          this->current->data=value%end;
-          return *this;
-      }
-      else //this number is double
-      {
-           cout<<"There is no number x in {1,12}"<<endl;
-      }
-   }
-
-    CircularInt& CircularInt::operator%=(int value)
-    {
-        if(this->current->data%value==0)
-        {
-            this->current->data= end;
-        }
-
-      else
-        {
-            this->current->data= this->current->data%value;
-        }
-
-        return *this;
-    }
-
-    CircularInt& CircularInt::operator%=(const CircularInt other)
-    {
-        if(this->current->data%((other.current)->data)==0)
-        {
-            this->current->data= end;
-        }
-
-      else
-        {
-            this->current->data= this->current->data%(other.current)->data;
-        }
-
-        return *this;
-    }
-
-  //  CircularInt& CircularInt::operator%(int value)
-  //  {
-  //      if((this->current->data)<=value)
-   //     {
-   //         return *this;
-   //     }
-   //     else
-   //     {
-
-   //     }
-      
-  
-
-   CircularInt::operator bool() //check
-    {
-    return (this->current)!=0;
-    }
-
-   CircularInt& CircularInt::operator-()//check
-    {
-    this->current->data=(this->current->data)-(end);
-
-    while(this->current->data < start)
-    {
-        if(this->current->data < 0)
-        {
-            this->current->data=  ((this->current->data)-((this->current->data)*2))%(end);
-        }
-        else
-        {
-            this->current->data=(this->current->data)%(end);
-        }
-    }
-    return *this;
-    }
-
-    CircularInt& CircularInt::operator--(int) // -1 check 
+CircularInt & CircularInt::operator=(int c)
 {
-    if (this->current->data == start)//if it on 1 a hour before that is 12
-    {
-        this->current->data = end;
-    }
-    else
-    {
-        this->current->data = this->current->data - 1;
-    }
-    return *this;
+	this->currentval = CurrentValue(c);
+	return *this;
 }
 
-  
-   CircularInt& CircularInt::operator-=(int value) //check
-   {
-    while ((this->current->data - value)<start)
-    {
-    this->current->data=(this->current->data-value)%start;
-    }
-    this->current->data = this->current->data-value;
-    if (this->current->data<start) 
-    {
-        this->current->data=start;
-    }
-    return *this;
-    }
+CircularInt & CircularInt::operator+=(int const & value)
+{
+	int res = currentval + value;
+	currentval = CurrentValue(res);
+	return *this;
+}
 
- CircularInt& CircularInt::operator-(int value)
- { 
-    int m=(this->current->data)%end; 
-    if(((value)-m)>start)
-     {
-         this->current->data=value-m;     
-     }
-     else
-     {
-       int r=value-m;
-       this->current->data= end+(value-m);
-     }
-   return *this;
- }
+CircularInt & CircularInt::operator+=(CircularInt const & value)
+{
+	int res = currentval + value.currentval;
+	currentval = CurrentValue(res);
+	return *this;
+}
 
+CircularInt & CircularInt::operator-=(int const & value)
+{
+	int res = currentval - value;
+	currentval = CurrentValue(res);
+	return *this;
+}
 
- bool CircularInt::operator==(const CircularInt other) const//compare two objects -check
-   {
-   return (this->current->data)==(other.current)->data;
-    
-  }
+CircularInt & CircularInt::operator-=(CircularInt const & value)
+{
+	int res = currentval - value.currentval;
+	currentval = CurrentValue(res);
+	return *this;
+}
 
-  bool CircularInt::operator==(int value)
-   {
-   return (this->current->data)==value;   
-  }
+CircularInt & CircularInt::operator++()
+{
+	int res = ++currentval;
+	currentval = CurrentValue(res);
+	return *this;
+}
 
+CircularInt CircularInt::operator++(int)
+{
+	CircularInt temp(*this);
+	++(*this);
+	return temp;
+}
 
-   bool CircularInt::operator!=(const CircularInt other) const//compare as well if they difference-check
-   {   
-       return (this->current)->data!=(other.current)->data;
-   }
+CircularInt & CircularInt::operator--()
+{
+	int res = --currentval;
+	currentval = CurrentValue(res);
+	return *this;
+}
 
-       bool CircularInt::operator!=(int value)
-   {   
-       return (this->current)->data!=value;
-   }
+CircularInt CircularInt::operator--(int)
+{
+	CircularInt temp(*this);
+	--(*this);
+	return temp;
+}
 
+CircularInt & CircularInt::operator*=(int const & value)
+{
+	currentval = CurrentValue(currentval * value);
+	return *this;
+}
 
-    bool CircularInt::operator>(const CircularInt other)
-    {
-          return (((this->current)->data)>((other.current)->data));
-    }
+CircularInt & CircularInt::operator*=(CircularInt const & value)
+{
+	currentval = CurrentValue(currentval * value.currentval);
+	return *this;
+}
 
-    bool CircularInt::operator<(const CircularInt other)
-    {   
-         return (((this->current)->data)<((other.current)->data));
-    }
+CircularInt & CircularInt::operator/=(int const & value)
+{
+	if (currentval % value != 0)
+	{
+		throw string(string("There is no numcer x in { ") + to_string(min1) + string(",") + to_string(max1) + " } such that x * " + to_string(value) + " = " + to_string(currentval));
+	}
+	int res = currentval / value;
+	currentval = CurrentValue(res);
+	return *this;
+}
 
-    bool CircularInt::operator>(int value)
-    {
-        return ((this->current)->data)>value;
-    
-    
-    }
+CircularInt & CircularInt::operator/=(CircularInt const & value)
+{
+	if (currentval % value.currentval != 0)
+	{
+		throw string(string("There is no numcer x in { ") + to_string(min1) + string(",") + to_string(max1) + " } such that x * " + to_string(value.currentval) + " = " + to_string(currentval));
+	}
+	int res = currentval / value.currentval;
+	currentval = CurrentValue(res);
+	return *this;
+}
 
-	bool CircularInt::operator<(int value)
-    {
-    return ((this->current)->data)<value;
-    }
+CircularInt & CircularInt::operator%=(int const & value)
+{
+	currentval = CurrentValue(currentval % value);
+	return *this;
+}
 
- 
+CircularInt & CircularInt::operator%=(CircularInt const & value)
+{
+	currentval = CurrentValue(currentval % value.currentval);
+	return *this;
+}
 
-    bool CircularInt::operator>=(const CircularInt other)
-    {
-          return (((this->current)->data)>=((other.current)->data));
-    }
+bool CircularInt::operator==(CircularInt const & c)
+{
+	return this->min1 == c.min1 && this->max1 == c.max1 && this->currentval == c.currentval;
+}
 
-    bool CircularInt::operator<=(const CircularInt other)
-    {   
-         return (((this->current)->data)<=((other.current)->data));
-    }
+bool CircularInt::operator!=(CircularInt const & c)
+{
+	return this->min1 != c.min1 || this->max1 != c.max1 || this->currentval != c.currentval;
+}
 
-       bool CircularInt::operator>=(int value)
-    {
-          return ((this->current)->data)>=value;
-    }
+bool CircularInt::operator==(int const & c)
+{
+	return this->currentval == c;
+}
 
-    bool CircularInt::operator<=(int value)
-    {   
-         return ((this->current)->data)<=value;
-    }
+bool CircularInt::operator!=(int const & c)
+{
+	return this->currentval != c;
+}
 
-    bool operator==(int value, const CircularInt other)//compare two objects -check
-    {
-        return (value)==(other.current)->data;
-    }
+bool CircularInt::operator>(CircularInt const & c)
+{
+	return this->currentval > c.currentval;
+}
 
-    bool operator!=(int value, const CircularInt other)
-    {
-        return (value)!=(other.current)->data;
-    }
+bool CircularInt::operator<(CircularInt const & c)
+{
+	return this->currentval < c.currentval;
+}
 
-  
-    ostream &operator<<(ostream &output, const CircularInt& ci)//printing
-    {      
-        return output<<(ci.current)->data;
-    }
+bool CircularInt::operator>(int const & c)
+{
+	return this->currentval > c;
+}
 
-    istream &operator>>(istream &input, const CircularInt& ci)
-    {
-       
-        return input>>(ci.current)->data;
-    }
+bool CircularInt::operator<(int const & c)
+{
+	return this->currentval < c;
+}
 
-    CircularInt::~CircularInt()
-    {
-       cout<<"";
-    }
+bool CircularInt::operator>=(CircularInt const & c)
+{
+	return this->currentval >= c.currentval;
+}
+
+bool CircularInt::operator<=(CircularInt const & c)
+{
+	return this->currentval <= c.currentval;
+}
+
+bool CircularInt::operator>=(int const & c)
+{
+	return this->currentval >= c;
+}
+
+bool CircularInt::operator<=(int const & c)
+{
+	return this->currentval <= c;
+}
+bool operator==(int val, const CircularInt & c)
+{
+	return val == c.currentval;
+}
+
+bool operator!=(int val, const CircularInt & c)
+{
+	return val != c.currentval;
+}
+
+bool operator>(int val, const CircularInt & c)
+{
+	return val > c.currentval;
+}
+
+bool operator<(int val, const CircularInt & c)
+{
+	return val < c.currentval;
+}
+
+bool operator>=(int val, const CircularInt & c)
+{
+	return val >= c.currentval;
+}
+
+bool operator<=(int val, const CircularInt & c)
+{
+	return val <= c.currentval;
+}
+
+CircularInt operator-(int val, const CircularInt & c)
+{
+	CircularInt res(c);
+	int result = val - c.currentval;
+	res.currentval = res.CurrentValue(result);
+	return res;
+}
+
+CircularInt operator+(int val, const CircularInt & c)
+{
+	CircularInt res(c);
+	int result = c.currentval + val;
+	res.currentval = res.CurrentValue(result);
+	return res;
+}
+
+CircularInt operator/(int val, const CircularInt & c)
+{
+	CircularInt res(c);
+	if (val % c.currentval != 0) {
+		throw string(string("There is no numcer x in { ") + to_string(c.min1) + string(",") + to_string(c.max1) + " } such that x * " + to_string(c.currentval) + " = " + to_string(val));
+	}
+	int result = val / c.currentval;
+	res.currentval = res.CurrentValue(result);
+	return res;
+}
+CircularInt & CircularInt::operator+(int const & value)
+{
+	CircularInt* temp = new CircularInt(*this);
+	int res = currentval + value;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+
+CircularInt & CircularInt::operator+(CircularInt const & value)
+{
+	CircularInt* temp = new CircularInt(*this);
+	int res = currentval + value.currentval;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+
+CircularInt & CircularInt::operator-()
+{
+	CircularInt* res = new CircularInt(*this);
+	int result = currentval * -1;
+	res->currentval = CurrentValue(result);
+	return *res;
+}
+
+CircularInt & CircularInt::operator-(int const & value)
+{
+	CircularInt* temp = new CircularInt(*this);
+	int res = currentval - value;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+
+CircularInt & CircularInt::operator-(CircularInt const & value)
+{
+	CircularInt* temp = new CircularInt(*this);
+	int res = currentval - value.currentval;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+CircularInt & CircularInt::operator*(int const & value)
+{
+	CircularInt* temp = new CircularInt(*this);
+	int res = currentval * value;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+
+CircularInt & CircularInt::operator*(CircularInt const & value)
+{
+	CircularInt* temp = new CircularInt(*this);
+	int res = currentval * value.currentval;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+CircularInt & CircularInt::operator/(int const & value)
+{
+	CircularInt* temp = new CircularInt(*this);
+	if (currentval % value != 0)
+	{
+		throw string(string("There is no numcer x in { ") + to_string(min1) + string(",") + to_string(max1) + " } such that x * " + to_string(value) + " = " + to_string(currentval));
+	}
+	int res = currentval / value;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+
+CircularInt & CircularInt::operator/(CircularInt const & value)
+{
+	if (currentval % value.currentval != 0)
+	{
+		throw string(string("There is no numcer x in { ") + to_string(min1) + string(",") + to_string(max1) + " } such that x * " + to_string(value.currentval) + " = " + to_string(currentval));
+	}
+	CircularInt* temp = new CircularInt(*this);
+	int res = currentval / value.currentval;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+CircularInt & CircularInt::operator%(int const & value)
+{
+	CircularInt* temp = new CircularInt(*this);
+	int res = currentval % value;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+CircularInt & CircularInt::operator%(CircularInt const & value)
+{
+	CircularInt* temp = new CircularInt(*this);
+	int res = currentval % value.currentval;
+	temp->currentval = CurrentValue(res);
+	return *temp;
+}
+ostream& operator<<(ostream& os, const CircularInt& o)
+{
+	os << o.currentval;
+	return os;
+}
+istream& operator>>(istream & input, CircularInt &o)
+{
+	int n;
+	input >> n;
+	o.currentval = o.CurrentValue(n);
+	return input;
+}
