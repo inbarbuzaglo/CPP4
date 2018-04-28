@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>  
 using namespace std;
 
@@ -66,6 +65,6 @@ public:
     friend CircularInt operator-(int val, const CircularInt& c);
 	friend CircularInt operator+(int val, const CircularInt& c);
     friend CircularInt operator/(int val, const CircularInt& c);
-    friend ostream& operator<<(ostream& os, const CircularInt& o);
+    friend ostream& operator<<(ostream& output, const CircularInt& o);
 	friend istream& operator>>(istream & input, CircularInt &o);
 };
